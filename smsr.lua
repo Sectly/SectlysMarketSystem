@@ -1,3 +1,6 @@
+local tSha = {}
+local Sectly = "Sectly"
+
 dofile("/sms_gui.lua")
 
 gui.debug = false
