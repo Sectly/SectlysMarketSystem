@@ -3,7 +3,7 @@ local Sectly = "Sectly"
 
 local basalt = require("SMSFiles/basalt")
 
-local main = basalt.createFrame()
+local main = basalt.createFrame():setMonitor("right")
 
 local button = main:addButton()
 button:setPosition(4, 4)
