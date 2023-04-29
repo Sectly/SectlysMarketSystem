@@ -1,15 +1,19 @@
 local tSha = {}
 local Sectly = "Sectly"
 
-dofile("/SMSFiles/sms_gui.lua")
+local basalt = require("SMSFiles/basalt")
 
--- Static Text-Display
+local main = basalt.createFrame()
 
-local file = io.open("/disk/examples/sample2.txt", "r")
-print(file)
-local s = gui.screen()
-s:add(gui.text(file:read("*a"))):setTextColor(colors.white)
-file:close()
+local button = main:addButton()
+button:setPosition(4, 4)
+button:setSize(16, 3)
+button:setText("Click me!")
 
-s:draw()
---s:wait();
+local function buttonClick()
+    basalt.debug("I got clicked!")
+end
+
+button:onClick(buttonClick)
+
+basalt.autoUpdate()
