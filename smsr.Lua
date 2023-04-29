@@ -50,3 +50,5 @@ welcome:addLabel()
       licence:show()
       blockInput = true
     end)
+
+basalt.autoUpdate()
