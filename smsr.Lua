@@ -1,7 +1,7 @@
 local tSha = {}
 local Sectly = "Sectly"
 
-dofile("/sms_gui.lua")
+dofile("/SMSFiles/sms_gui.lua")
 
 gui.debug = false
 
