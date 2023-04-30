@@ -15,6 +15,9 @@ function splitstring(input, seperator)
   return matches
 end
 
+local paymentType = ""
+local priceTable = {}
+
 function Loop()
   local basalt = require("SMSFiles/basalt")
 
@@ -50,7 +53,7 @@ function Loop()
                 items[item.name].stock = item.count
               end
             else
-                items[item.name] = { ["displayName"] = displayName, ["stock"] =  item.count }
+                items[item.name] = { ["displayName"] = displayName, ["stock"] =  item.count, ["slot"] = i }
             end
           end
         end
@@ -63,14 +66,37 @@ function Loop()
   end
 
   function buyItem(shopData, scanData)
+    textFrameText:setText("Loading...")
+    textFrame:show()
+
     local getItem = shopData:getItem(shopData:getItemIndex()).text
     
     local idString = splitstring(getItem, "|")
     idString = string.gsub(idString[1], " ", "")
 
-    print(idString)
+    if scanData[idString] and scanData[idString] ~= nil then
+        turtle.select(scanData[idString].slot)
 
-    print(textutils.serialise(scanData[idString]))
+        if turtle.getItemDetail(scanData[idString].slot, false).name == idString and turtle.getItemDetail(scanData[idString].slot, false).count > 1 then
+          textFrameText:setText("Product: "..idString)
+        else
+          textFrameText:setText("ERROR: Product Does Not Exist, Rebooting Shop... [ERR:PM2]")
+
+          sleep(4)
+
+          basalt.stopUpdate()
+
+          Loop()
+        end
+    else
+      textFrameText:setText("ERROR: Product Does Not Exist, Rebooting Shop... [ERR:PM1]")
+
+      sleep(4)
+
+      basalt.stopUpdate()
+
+      Loop()
+    end
   end
 
   local refreshStock = basalt.schedule(function()
@@ -95,6 +121,8 @@ function Loop()
       :setBackground(colors.green)
       :setForeground(colors.white)
       :onClick(function()
+        shopFrame:hide()
+
         buyItem(shopData, scanData)
       end)
     shopFrame:addButton()
@@ -130,7 +158,25 @@ function Loop()
     :setForeground(colors.white)
     :onClick(function()
       refreshStock()
-    end)
+   end)
+
+   local getInventory = scanInventory()
+
+   print("Payment Type: [Example: minecraft:diamond]")
+       
+   paymentType = read()
+
+   for Id, Item in pairs(getInventory) do
+     if priceTable[Id] and priceTable[Id] ~= nil then
+       print("Registered: "..Id..", Price: "..priceTable[Id])
+     else
+       print("No Price For: "..Id..")
+
+       print("Input Price Per Item: [Example: 1 Or 0.2]")
+
+       priceTable[Id] = read()
+     end
+   end
 
    basalt.autoUpdate()
 end
