@@ -207,7 +207,7 @@ function Loop()
               local amountListText = amountList:getItem(amountList:getItemIndex()).text
               amountListText = splitstring(amountListText, "|")
               amountListText = string.gsub(amountListText[1], " ", "")
-              amountListText = string.gsub(amountListText[1], "Amount:", "")
+              amountListText = string.gsub(amountListText, "Amount:", "")
 
               handlePayment(scanData[idString].slot, idString, tonumber(amountListText))
             end)
