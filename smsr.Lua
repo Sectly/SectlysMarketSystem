@@ -79,6 +79,9 @@ function Loop()
 
         if turtle.getItemDetail(scanData[idString].slot, false).name == idString and turtle.getItemDetail(scanData[idString].slot, false).count > 1 then
           textFrameText:setText("Product: "..idString)
+
+          turtle.select(1)
+          turtle.drop()
         else
           textFrameText:setText("ERROR: Product Does Not Exist, Rebooting Shop... [ERR:PM2]")
 
@@ -200,6 +203,7 @@ function Loop()
    print("Setup Done!")
 
    turtle.select(1)
+   turtle.drop()
 
    print("Shop Started!")
 
