@@ -39,7 +39,14 @@ function scanInventory()
 end
 
 function refreshStock()
-  print(textutils.serialise(scanInventory()))
+  local scanData = scanInventory()
+  
+  print(textutils.serialise(scanData))
+
+  for Id, Item in pairs(scanData) do
+    print(Id + ", " + Item.display + ", " + Item.count)
+  end
+
   sleep(14)
 end
 
