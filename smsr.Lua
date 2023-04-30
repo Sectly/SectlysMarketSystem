@@ -101,11 +101,11 @@ function Loop()
           if maxItemAmount == 16 and getItemSpace(scanData[idString].slot) <= 0 then
               maxItemAmount = 16
 
-              amountList:addItem(""..maxItemAmount / 2.."")
+              amountList:addItem(""..math.floor(maxItemAmount / 2).."")
           else
-              amountList:addItem(""..maxItemAmount / 8.."")
-              amountList:addItem(""..maxItemAmount / 4.."")
-              amountList:addItem(""..maxItemAmount / 2.."")
+              amountList:addItem(""..math.floor(maxItemAmount / 8).."")
+              amountList:addItem(""..math.floor(maxItemAmount / 4).."")
+              amountList:addItem(""..math.floor(maxItemAmount / 2).."")
           end
 
           amountList:addItem(""..maxItemAmount.."")
