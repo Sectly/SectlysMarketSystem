@@ -30,6 +30,10 @@ function Loop()
   welcomeFrame:show()
 
   local textFrameText = textFrame:addLabel():setText("Error: No Input Text")
+  local shopFrameText = shopFrame:addLabel():setText("Please Choose Your Product: ")
+  local amountFrameText = amountFrame:addLabel():setText("Please Choose Your Product Amount: ")
+
+  local purchaseFrameText = purchaseFrame:addLabel():setPosition(3,8):setSize("parent.w-10","3"):setText("Please Input X ?(s) And Then Click Finish To Receive Your Product!")
 
   local function scanInventory()
     local items = {}
@@ -88,9 +92,9 @@ function Loop()
         if turtle.getItemDetail(scanData[idString].slot, false).name == idString and turtle.getItemDetail(scanData[idString].slot, false).count > 1 then
           textFrameText:setText("Selected Product: "..idString..", Please Wait...")
           
-          sleep(1)
+          sleep(2)
 
-          textFrameText:setText("Select How Many "..idString.." You Want: ")
+          amountFrame:show()
 
           local amountList = amountFrame:addList("amountList"):setPosition(2,2):setSize(48,16):setScrollable(true)
 
@@ -109,6 +113,7 @@ function Loop()
           end
 
           amountList:addItem(""..maxItemAmount.."")
+          amountList:show()
 
           amountFrame:addButton()
             :setPosition("parent.w-10","parent.h-1")
