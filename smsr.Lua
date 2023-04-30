@@ -20,7 +20,6 @@ function scanInventory()
 
       if (turtle.getItemCount(i) > 1) then
         local item = turtle.getItemDetail(i, true)
-        print(textutils.serialise(item))
 
         if (item) then
           local displayName = item.displayName or item.name
@@ -46,12 +45,12 @@ end
 
 function refreshStock()
   local scanData = scanInventory()
-  
-  print(textutils.serialise(scanData))
 
-  --for Id, Item in pairs(scanData) do
-    --print(Id + ", " + Item.display + ", " + Item.count)
-  --end
+  local shopData = shopFrame:addList("productList"):setPosition(20,2)
+
+  for Id, Item in pairs(scanData) do
+    shopData:addItem(Item.display.." (Stock: "..Item.count..") | Price: N/A")
+  end
 
   sleep(14)
 end
