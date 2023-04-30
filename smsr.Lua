@@ -166,7 +166,7 @@ function Loop()
 
    print("Checking Data...")
 
-   if exists("SMSFiles/data.txt") then
+   if fs.exists("SMSFiles/data.txt") then
      local file = fs.open("SMSFiles/data.txt", "r")
      local contents = textutils.unserialize(file.readAll())
      file.close()
