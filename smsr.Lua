@@ -36,10 +36,10 @@ function Loop()
         turtle.select(i)
 
         if (turtle.getItemCount(i) > 1) then
-          local item = turtle.getItemDetail(i, true)
+          local item = turtle.getItemDetail(i, false)
 
           if (item) then
-            local displayName = item.displayName or item.name
+            local displayName = item.name --item.displayName or item.name
 
             if items[item.name] and items[item.name] ~= nil then
               items[item.name].displayName = displayName
@@ -65,9 +65,10 @@ function Loop()
   function buyItem(shopData, scanData)
     local getItem = shopData:getItem(shopData:getItemIndex()).text
     
-    local idString = splitstring(getItem, "[")
+    local idString = splitstring(getItem, "|")
+    idString:gsub(" ", "")
 
-    print(textutils.serialise(scanData[idString[2]]))
+    print(textutils.serialise(scanData[idString[1]]))
   end
 
   local refreshStock = basalt.schedule(function()
@@ -82,7 +83,7 @@ function Loop()
     for Id, Item in pairs(scanData) do
       print(Id)
       print(Item)
-      shopData:addItem(" "..Item.displayName.." (Stock: "..Item.stock..") | ["..Id.."]")
+      shopData:addItem(" "..Item.displayName.." | (Stock: "..Item.stock..")")
     end
 
     shopFrame:addButton()
