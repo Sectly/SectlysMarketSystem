@@ -42,6 +42,8 @@ function scanInventory()
     end
   end
 
+  turtle.select(1)
+
   return items
 end
 
