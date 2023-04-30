@@ -43,7 +43,11 @@ function scanInventory()
   return items
 end
 
-function refreshStock()
+local refreshStock = basalt.schedule(function()()
+  textFrameText:setText("Loading...")
+  welcomeFrame:hide()
+  textFrame:show()
+
   local scanData = scanInventory()
 
   local shopData = shopFrame:addList("productList"):setPosition(20,2)
@@ -55,7 +59,10 @@ function refreshStock()
   end
 
   sleep(14)
-end
+
+  textFrame:hide()
+  shopFrame:show()
+end)
 
 local textFrameText = textFrame:addLabel():setText("Error: No Input Text")
 
@@ -75,12 +82,7 @@ welcomeFrame:addButton()
     :setBackground(colors.green)
     :setForeground(colors.white)
     :onClick(function()
-      --textFrameText:setText("Loading...")
-      welcomeFrame:hide()
-      textFrame:show()
       refreshStock()
-      textFrame:hide()
-      shopFrame:show()
     end)
 
 basalt.autoUpdate()
