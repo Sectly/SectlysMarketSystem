@@ -49,7 +49,7 @@ function Loop()
   end
 
   function buyItem(shopData, scanData)
-    local getItem = shopData:getItem(shopData:getItemIndex()).text
+    local getItem = shopData:getItem(shopData:getItemIndex()):getValue()
 
     print(textutils.serialise(scanData[getItem]))
   end
@@ -66,7 +66,7 @@ function Loop()
     for Id, Item in pairs(scanData) do
       print(Id)
       print(Item)
-      shopData:addItem(" "..Item.displayName.." (Stock: "..Item.stock..") | Price: N/A ")
+      shopData:addItem(" "..Item.displayName.." (Stock: "..Item.stock..") | Price: N/A ", nil, nil, Item.name)
     end
 
     shopFrame:addButton()
