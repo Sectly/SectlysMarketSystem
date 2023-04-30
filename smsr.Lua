@@ -98,40 +98,43 @@ function Loop()
         :setForeground(colors.white)
         :onClick(function()
           purchaseFrameText:setText("Working...")
+          purchaseFrameText:show()
 
-          turtle.select(1)
+          basalt.schedule(function()
+            turtle.select(1)
 
-          local itemDetails = turtle.getItemDetail(1, false) or nil
+            local itemDetails = turtle.getItemDetail(1, false) or nil
 
-          if itemDetails and itemDetails ~= nil and itemDetails.name == paymentType then
-            if turtle.getItemCount(1) >= cost then
-              purchaseFrameText:setText("Thanks For Shopping And Come Again!")
+            if itemDetails and itemDetails ~= nil and itemDetails.name == paymentType then
+              if turtle.getItemCount(1) >= cost then
+                purchaseFrameText:setText("Thanks For Shopping And Come Again!")
 
-              local getBack = (turtle.getItemCount(1) - cost)
+                local getBack = (turtle.getItemCount(1) - cost)
 
-              if getBack >= 1 then
+                if getBack >= 1 then
+                  turtle.select(1)
+                  turtle.drop(getBack)
+                end
+
                 turtle.select(1)
-                turtle.drop(getBack)
+                turtle.dropDown()
+
+                turtle.select(itemSlot)
+                turtle.drop(amount)
+
+                basalt.stopUpdate()
+
+                Loop()
+              else
+                purchaseFrameText:setText("Error: More Payment Is Required, Please Input "..(cost - turtle.getItemCount(1)).." More "..paymentType.."(s)! | (Please Input "..cost.." "..paymentType.."(s) And Then Click Finish To Receive Your Product!)")
               end
+            else
+              purchaseFrameText:setText("Error: Wrong Payment Type/No Payment Input! | (Please Input "..cost.." "..paymentType.."(s) And Then Click Finish To Receive Your Product!)")
 
               turtle.select(1)
-              turtle.dropDown()
-
-              turtle.select(itemSlot)
-              turtle.drop(amount)
-
-              basalt.stopUpdate()
-
-              Loop()
-            else
-              purchaseFrameText:setText("Error: More Payment Is Required, Please Input "..(cost - turtle.getItemCount(1)).." More "..paymentType.."(s)! | (Please Input "..cost.." "..paymentType.."(s) And Then Click Finish To Receive Your Product!)")
+              turtle.drop()
             end
-          else
-            purchaseFrameText:setText("Error: Wrong Payment Type/No Payment Input! | (Please Input "..cost.." "..paymentType.."(s) And Then Click Finish To Receive Your Product!)")
-
-            turtle.select(1)
-            turtle.drop()
-          end
+          end)
         end)
       purchaseFrame:addButton()
         :setPosition("parent.w-48","parent.h-1")
