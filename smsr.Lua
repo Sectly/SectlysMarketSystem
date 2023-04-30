@@ -23,12 +23,18 @@ function scanInventory()
         print(textutils.serialise(item))
 
         if (item) then
-          items[item.name]["displayName"] = item.displayName or item.name
+          local displayName = item.displayName or item.name
 
-          if items[item.name]["stock"] and items[item.name]["stock"] ~= nil then
-            items[item.name]["stock"] = (items[item.name]["stock"] + item.count)
+          if items[item.name] and items[item.name] ~= nil then
+            items[item.name].displayName = displayName
+
+            if items[item.name].stock and items[item.name].stock ~= nil then
+              items[item.name].stock = (items[item.name].stock + item.count)
+            else
+              items[item.name].stock = item.count
+            end
           else
-            items[item.name]["stock"] = item.count
+              items[item.name] = { ["displayName"] = displayName, ["stock"] =  item.count}
           end
         end
       end
