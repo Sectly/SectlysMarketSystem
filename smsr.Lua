@@ -15,7 +15,7 @@ function splitstring(input, seperator)
   return matches
 end
 
-local shopName = nil
+local shopName = "?"
 local paymentType = nil
 local priceTable = {}
 
@@ -348,7 +348,7 @@ function Loop()
      shopName = contents.name
    end
 
-   if shopName == nil then
+   if shopName == "?" then
      print("Shop Name: [Example: TEC_NO's Shop]")
        
      shopName = read()
