@@ -19,6 +19,8 @@ local paymentType = nil
 local priceTable = {}
 
 function Loop()
+  sleep(4)
+
   local basalt = require("SMSFiles/basalt")
 
   local welcomeFrame = basalt.createFrame():setMonitor("right")
@@ -107,11 +109,9 @@ function Loop()
               turtle.dropDown()
 
               turtle.select(itemSlot)
-              turtle.dropDown(amount)
+              turtle.drop(amount)
 
               purchaseFrameText:setText("Thanks For Shopping And Come Again!")
-
-              sleep(4)
 
               basalt.stopUpdate()
 
@@ -157,8 +157,6 @@ function Loop()
         if turtle.getItemDetail(scanData[idString].slot, false).name == idString and turtle.getItemDetail(scanData[idString].slot, false).count > 1 then
           textFrameText:setText("Selected Product: "..idString..", Please Wait...")
           textFrame:show()
-          
-          sleep(2)
 
           amountFrame:show()
 
@@ -213,16 +211,12 @@ function Loop()
         else
           textFrameText:setText("ERROR: Product Does Not Exist, Rebooting Shop... [ERR:PM2]")
 
-          sleep(4)
-
           basalt.stopUpdate()
 
           Loop()
         end
     else
       textFrameText:setText("ERROR: Product Does Not Exist, Rebooting Shop... [ERR:PM1]")
-
-      sleep(4)
 
       basalt.stopUpdate()
 
