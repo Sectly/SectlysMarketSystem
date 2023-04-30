@@ -19,7 +19,8 @@ function scanInventory()
       turtle.select(i)
 
       if (turtle.getItemCount(i) > 1) then
-        local item = turtle.getItemDetail(i)
+        local item = turtle.getItemDetail(i, true)
+        print(textutils.serialise(item))
 
         if (item) then
           if items[item.name] and items[item.name] ~= nil then
