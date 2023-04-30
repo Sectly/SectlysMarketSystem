@@ -33,7 +33,7 @@ function Loop()
   local shopFrameText = shopFrame:addLabel():setText("Please Choose Your Product: ")
   local amountFrameText = amountFrame:addLabel():setText("Please Choose Your Product Amount: ")
 
-  local purchaseFrameText = purchaseFrame:addLabel():setPosition(3,8):setSize("parent.w-10","3"):setText("Please Input X ?(s) And Then Click Finish To Receive Your Product!")
+  local purchaseFrameText = purchaseFrame:addLabel():setPosition(8,8):setSize("parent.w-10","3"):setText("Please Input X ?(s) And Then Click Finish To Receive Your Product!")
 
   local function scanInventory()
     local items = {}
@@ -86,7 +86,7 @@ function Loop()
       purchaseFrame:show()
       purchaseFrameText:setText("Please Input "..cost.." "..paymentType.."(s) And Then Click Finish To Receive Your Product!")
 
-      amountFrame:addButton()
+      purchaseFrame:addButton()
           :setPosition("parent.w-10","parent.h-1")
           :setSize(10,1)
           :setText("Finish")
@@ -135,7 +135,7 @@ function Loop()
               loopPayment()
             end
           end)
-        amountFrame:addButton()
+        purchaseFrame:addButton()
           :setPosition("parent.w-48","parent.h-1")
           :setSize(10,1)
           :setText("Cancel")
