@@ -15,7 +15,7 @@ function splitstring(input, seperator)
   return matches
 end
 
-local paymentType = ""
+local paymentType = nil
 local priceTable = {}
 
 function Loop()
@@ -164,9 +164,11 @@ function Loop()
 
    local getInventory = scanInventory()
 
-   print("Payment Type: [Example: minecraft:diamond]")
+   if paymentType == nil then
+     print("Payment Type: [Example: minecraft:diamond]")
        
-   paymentType = read()
+     paymentType = read()
+   end
 
    for Id, Item in pairs(getInventory) do
      if priceTable[Id] and priceTable[Id] ~= nil then
