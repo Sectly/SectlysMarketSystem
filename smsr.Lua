@@ -170,7 +170,7 @@ function Loop()
      if priceTable[Id] and priceTable[Id] ~= nil then
        print("Registered: "..Id..", Price: "..priceTable[Id])
      else
-       print("No Price For: "..Id..")
+       print("No Price For: "..Id)
 
        print("Input Price Per Item: [Example: 1 Or 0.2]")
 
