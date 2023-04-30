@@ -36,7 +36,7 @@ function Loop()
                 items[item.name].stock = item.count
               end
             else
-                items[item.name] = { ["displayName"] = displayName, ["stock"] =  item.count}
+                items[item.name] = { ["displayName"] = displayName, ["stock"] =  item.count }
             end
           end
         end
@@ -48,7 +48,10 @@ function Loop()
     return items
   end
 
-  function buyItem()
+  function buyItem(shopData, scanData)
+    local getItem = shopData:getItemIndex()
+
+    print(textutils.serialise(scanData[getItem]))
   end
 
   local refreshStock = basalt.schedule(function()
@@ -58,7 +61,7 @@ function Loop()
 
     local scanData = scanInventory()
 
-    local shopData = shopFrame:addList("productList"):setPosition(2,2):setSize(48,16)
+    local shopData = shopFrame:addList("productList"):setPosition(2,2):setSize(48,16):setScrollable(true)
 
     for Id, Item in pairs(scanData) do
       print(Id)
@@ -73,7 +76,7 @@ function Loop()
       :setBackground(colors.green)
       :setForeground(colors.white)
       :onClick(function()
-        buyItem()
+        buyItem(shopData, scanData)
       end)
     shopFrame:addButton()
       :setPosition("parent.w-48","parent.h-1")
