@@ -1,15 +1,15 @@
 local tSha = {}
 local Sectly = "Sectly"
 
-local basalt = require("SMSFiles/basalt")
-
-local welcomeFrame = basalt.createFrame():setMonitor("right")
-local shopFrame = basalt.createFrame():setMonitor("right")
-local amountFrame = basalt.createFrame():setMonitor("right")
-local purchaseFrame = basalt.createFrame():setMonitor("right")
-local textFrame = basalt.createFrame():setMonitor("right")
-
 function Loop()
+  local basalt = require("SMSFiles/basalt")
+
+  local welcomeFrame = basalt.createFrame():setMonitor("right")
+  local shopFrame = basalt.createFrame():setMonitor("right")
+  local amountFrame = basalt.createFrame():setMonitor("right")
+  local purchaseFrame = basalt.createFrame():setMonitor("right")
+  local textFrame = basalt.createFrame():setMonitor("right")
+
   welcomeFrame:show()
 
   local textFrameText = textFrame:addLabel():setText("Error: No Input Text")
@@ -82,6 +82,8 @@ function Loop()
       :setBackground(colors.yellow)
       :setForeground(colors.white)
       :onClick(function()
+        basalt.stopUpdate()
+
         Loop()
       end)
 
@@ -107,8 +109,8 @@ function Loop()
     :onClick(function()
       refreshStock()
     end)
+
+   basalt.autoUpdate()
 end
 
 Loop()
-
-basalt.autoUpdate()
