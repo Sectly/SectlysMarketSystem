@@ -96,8 +96,12 @@ function Loop()
         :onClick(function()
           turtle.select(1)
 
-          if turtle.getItemDetail(1, false) and turtle.getItemDetail(1, false) ~= nil and turtle.getItemDetail(1, false).name == paymentType then
+          local itemDetails = turtle.getItemDetail(1, false) or nil
+
+          if itemDetails and itemDetails ~= nil and itemDetails.name == paymentType then
             if turtle.getItemCount(1) >= cost then
+              purchaseFrameText:setText("Thanks For Shopping And Come Again!")
+
               local getBack = (turtle.getItemCount(1) - cost)
 
               if getBack >= 1 then
@@ -110,8 +114,6 @@ function Loop()
 
               turtle.select(itemSlot)
               turtle.drop(amount)
-
-              purchaseFrameText:setText("Thanks For Shopping And Come Again!")
 
               basalt.stopUpdate()
 
