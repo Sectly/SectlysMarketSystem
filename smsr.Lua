@@ -51,7 +51,7 @@ function refreshStock()
   for Id, Item in pairs(scanData) do
     print(Id)
     print(Item)
-    shopData:addItem(Item.display.." (Stock: "..Item.stock..") | Price: N/A")
+    shopData:addItem(Item.displayName.." (Stock: "..Item.stock..") | Price: N/A")
   end
 
   sleep(14)
