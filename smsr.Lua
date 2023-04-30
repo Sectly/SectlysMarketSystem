@@ -20,7 +20,7 @@ function scanInventory()
         local item = turtle.getItemDetail(i)
 
         if (item) then
-          if items[item.name] and items[item.name] ~- nil then
+          if items[item.name] and items[item.name] ~= nil then
             items[item.name] += item.count
           else
             items[item.name] = item.count
