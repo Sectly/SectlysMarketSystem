@@ -21,7 +21,7 @@ function scanInventory()
 
         if (item) then
           if items[item.name] and items[item.name] ~= nil then
-            items[item.name] += item.count
+            items[item.name] = (items[item.name] + item.count)
           else
             items[item.name] = item.count
           end
