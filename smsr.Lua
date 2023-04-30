@@ -105,10 +105,14 @@ function Loop()
         :setBackground(colors.green)
         :setForeground(colors.white)
         :onClick(function()
-          basalt.schedule(function()
-            purchaseFrameText:setText("Working...")
-            purchaseFrameText:show()
-          end)()
+          purchaseFrameText:setText("Working...")
+          purchaseFrameText:show()
+
+          local eventData = table.pack(os.pullEventRaw())
+          basalt.update(table.unpack(eventData))
+
+          local eventData = table.pack(os.pullEventRaw())
+          basalt.update(table.unpack(eventData))
 
           sleep(4)
 
