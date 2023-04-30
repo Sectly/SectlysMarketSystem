@@ -136,7 +136,7 @@ function Loop()
               turtle.select(1)
               turtle.drop()
             end
-          end)
+          end)()
         end)
       purchaseFrame:addButton()
         :setPosition("parent.w-48","parent.h-1")
