@@ -49,7 +49,9 @@ function refreshStock()
   local shopData = shopFrame:addList("productList"):setPosition(20,2)
 
   for Id, Item in pairs(scanData) do
-    shopData:addItem(Item.display.." (Stock: "..Item.count..") | Price: N/A")
+    print(Id)
+    print(Item)
+    --shopData:addItem(Item.display.." (Stock: "..Item.count..") | Price: N/A")
   end
 
   sleep(14)
