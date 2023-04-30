@@ -145,12 +145,16 @@ function Loop()
         :setBackground(colors.yellow)
         :setForeground(colors.white)
         :onClick(function()
-          turtle.select(1)
-          turtle.drop()
+          purchaseFrameText:setText("Working...")
 
-          basalt.stopUpdate()
+          basalt.schedule(function()
+            turtle.select(1)
+            turtle.drop()
 
-          Loop()
+            basalt.stopUpdate()
+
+            Loop()
+          end)()
         end)
   end
 
