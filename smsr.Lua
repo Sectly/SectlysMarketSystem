@@ -118,14 +118,14 @@ function Loop()
 
                 Loop()
               else
-                purchaseFrameText:setText("Error: More Money Is Required!")
+                purchaseFrameText:setText("Error: More Payment Is Required!")
 
                 sleep(2)
 
                 loopPayment()
               end
             else
-              purchaseFrameText:setText("Error: Wrong Money Type!")
+              purchaseFrameText:setText("Error: Wrong Payment Type!")
 
               turtle.select(1)
               turtle.drop()
