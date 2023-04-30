@@ -164,6 +164,17 @@ function Loop()
 
    local getInventory = scanInventory()
 
+   print("Checking Data...")
+
+   if exists("SMSFiles/data.txt") then
+     local file = fs.open("SMSFiles/data.txt", "r")
+     local contents = textutils.unserialize(file.readAll())
+     file.close()
+
+     paymentType = contents.payment
+     priceTable = contents.prices
+   end
+
    if paymentType == nil then
      print("Payment Type: [Example: minecraft:diamond]")
        
@@ -181,6 +192,10 @@ function Loop()
        priceTable[Id] = read()
      end
    end
+
+   local file = fs.open("SMSFiles/data.txt", "w")
+   file.write(textutils.serialise({ ["payment"] = paymentType, ["prices"] = priceTable }))
+   file.close()
 
    print("Setup Done!")
 
