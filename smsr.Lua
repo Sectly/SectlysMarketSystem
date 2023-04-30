@@ -18,14 +18,18 @@ end
 local paymentType = nil
 local priceTable = {}
 
+local basalt = nil
+
 function Loop()
   print("Working...")
 
-  basalt.stopUpdate()
+  if basalt and basalt ~= nil then
+    basalt.stopUpdate()
+  end
 
   sleep(4)
 
-  local basalt = require("SMSFiles/basalt")
+  basalt = require("SMSFiles/basalt")
 
   local welcomeFrame = basalt.createFrame():setMonitor("right")
   local shopFrame = basalt.createFrame():setMonitor("right")
