@@ -43,7 +43,7 @@ function scanInventory()
   return items
 end
 
-local refreshStock = basalt.schedule(function()()
+local refreshStock = basalt.schedule(function()
   textFrameText:setText("Loading...")
   welcomeFrame:hide()
   textFrame:show()
