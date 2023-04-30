@@ -16,8 +16,8 @@ function scanInventory()
     if i ~= 1 then
       turtle.select(i)
 
-      if (turtle.getItemCount([i]) > 1) {
-        local item = turtle.getItemDetail()
+      if (turtle.getItemCount(i) > 1) {
+        local item = turtle.getItemDetail(i)
 
         if (item) then
           if items[item.name] and items[item.name] ~- nil then
