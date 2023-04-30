@@ -6,13 +6,13 @@ function splitstring(input, seperator)
     seperator = "%s"
   end
  
-  local table = {}
+  local matches = {}
  
-  for string in string.gmatch(input, "([^"..seperator.."]+)") do
-    table.insert(table, string)
+  for match in string.gmatch(input, "([^"..seperator.."]+)") do
+    table.insert(matches, match)
   end
  
-  return table
+  return matches
 end
 
 function Loop()
