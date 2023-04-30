@@ -82,7 +82,7 @@ function Loop()
     for Id, Item in pairs(scanData) do
       print(Id)
       print(Item)
-      shopData:addItem(" "..Item.displayName.." (Stock: "..Item.stock..") | ["..Item.name.."]")
+      shopData:addItem(" "..Item.displayName.." (Stock: "..Item.stock..") | ["..Id.."]")
     end
 
     shopFrame:addButton()
