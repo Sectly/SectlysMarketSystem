@@ -65,6 +65,14 @@ function Loop()
     return items
   end
 
+  function handlePayment(shopData, scanData, itemAmount)
+    function loopPayment()
+    
+    end
+
+    loopPayment()
+  end
+
   function buyItem(shopData, scanData)
     textFrameText:setText("Loading...")
     textFrame:show()
@@ -78,10 +86,50 @@ function Loop()
         turtle.select(scanData[idString].slot)
 
         if turtle.getItemDetail(scanData[idString].slot, false).name == idString and turtle.getItemDetail(scanData[idString].slot, false).count > 1 then
-          textFrameText:setText("Product: "..idString)
+          textFrameText:setText("Selected Product: "..idString..", Please Wait...")
+          
+          sleep(1)
 
-          turtle.select(1)
-          turtle.drop()
+          textFrameText:setText("Select How Many "..idString.." You Want: ")
+
+          local amountList = amountFrame:addList("amountList"):setPosition(2,2):setSize(48,16):setScrollable(true)
+
+          local maxItemAmount = getItemCount(scanData[idString].slot)
+
+          amountList:addItem("1")
+
+          if maxItemAmount == 16 and getItemSpace(scanData[idString].slot) <= 0 then
+              maxItemAmount = 16
+
+              amountList:addItem(""..maxItemAmount / 2.."")
+          else
+              amountList:addItem(""..maxItemAmount / 8.."")
+              amountList:addItem(""..maxItemAmount / 4.."")
+              amountList:addItem(""..maxItemAmount / 2.."")
+          end
+
+          amountList:addItem(""..maxItemAmount.."")
+
+          amountFrame:addButton()
+            :setPosition("parent.w-10","parent.h-1")
+            :setSize(10,1)
+            :setText("Buy")
+            :setBackground(colors.green)
+            :setForeground(colors.white)
+            :onClick(function()
+              handlePayment(shopData, scanData, amountList:getItem(amountList:getItemIndex()).text)
+            end)
+          amountFrame:addButton()
+            :setPosition("parent.w-48","parent.h-1")
+            :setSize(10,1)
+            :setText("Cancel")
+            :setBackground(colors.yellow)
+            :setForeground(colors.white)
+            :onClick(function()
+              basalt.stopUpdate()
+
+              Loop()
+            end)
         else
           textFrameText:setText("ERROR: Product Does Not Exist, Rebooting Shop... [ERR:PM2]")
 
@@ -140,7 +188,7 @@ function Loop()
         Loop()
       end)
 
-    textFrame:hide()
+    textFrameText:setText("Choose A Product: ")
     shopFrame:show()
   end)
 
