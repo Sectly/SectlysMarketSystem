@@ -19,6 +19,8 @@ local paymentType = nil
 local priceTable = {}
 
 function Loop()
+  print("Working...")
+
   sleep(4)
 
   local basalt = require("SMSFiles/basalt")
