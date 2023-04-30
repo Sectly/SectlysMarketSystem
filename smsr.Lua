@@ -1,6 +1,20 @@
 local tSha = {}
 local Sectly = "Sectly"
 
+function splitstring(input, seperator)
+  if seperator == nil then
+    seperator = "%s"
+  end
+ 
+  local table = {}
+ 
+  for string in string.gmatch(input, "([^"..seperator.."]+)") do
+    table.insert(table, string)
+  end
+ 
+  return table
+end
+
 function Loop()
   local basalt = require("SMSFiles/basalt")
 
@@ -49,9 +63,11 @@ function Loop()
   end
 
   function buyItem(shopData, scanData)
-    local getItem = shopData:getItem(shopData:getItemIndex()):getValue()
+    local getItem = shopData:getItem(shopData:getItemIndex()).text
+    
+    local idString = splitstring(getItem, "[")
 
-    print(textutils.serialise(scanData[getItem]))
+    print(textutils.serialise(scanData[idString[2]]))
   end
 
   local refreshStock = basalt.schedule(function()
@@ -66,7 +82,7 @@ function Loop()
     for Id, Item in pairs(scanData) do
       print(Id)
       print(Item)
-      shopData:addItem(" "..Item.displayName.." (Stock: "..Item.stock..") | Price: N/A ", nil, nil, Item.name)
+      shopData:addItem(" "..Item.displayName.." (Stock: "..Item.stock..") | ["..Item.name.."]")
     end
 
     shopFrame:addButton()
