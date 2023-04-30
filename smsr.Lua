@@ -109,6 +109,14 @@ function Loop()
 
                 turtle.select(itemSlot)
                 turtle.dropDown(amount)
+
+                purchaseFrameText:setText("Thanks For Shopping And Come Again!")
+
+                sleep(4)
+
+                basalt.stopUpdate()
+
+                Loop()
               else
                 purchaseFrameText:setText("Error: More Money Is Required!")
 
