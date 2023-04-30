@@ -95,7 +95,7 @@ function Loop()
           :onClick(function()
             turtle.select(1)
 
-            if turtle.getItemDetail(1, false).name == paymentType then
+            if turtle.getItemDetail(1, false) and turtle.getItemDetail(1, false) ~= nil and turtle.getItemDetail(1, false).name == paymentType then
               if turtle.getItemCount(1) >= cost then
                 local getBack = (turtle.getItemCount(1) - cost)
 
@@ -125,7 +125,7 @@ function Loop()
                 loopPayment()
               end
             else
-              purchaseFrameText:setText("Error: Wrong Payment Type!")
+              purchaseFrameText:setText("Error: Wrong Payment Type/No Payment Input!")
 
               turtle.select(1)
               turtle.drop()
