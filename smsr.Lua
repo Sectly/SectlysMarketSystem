@@ -26,6 +26,7 @@ function scanInventory()
             items[item.name] = item.count
           end
         end
+      end
     end
   end
 
