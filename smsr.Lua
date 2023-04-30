@@ -70,12 +70,77 @@ function Loop()
   end
 
   function calculatePrice(id, amount)
-    return math.floor(tonumber(priceTable[id]) * tonumber(amount)) or 64
+    local priceData = math.floor(tonumber(priceTable[id]) * tonumber(amount)) or 64
+
+    if priceData < 1 then
+      priceData = 1
+    end
+
+    return priceData or 64
   end
 
-  function handlePayment(shopData, scanData, itemAmount)
+  function handlePayment(itemSlot, idString, amount)
     function loopPayment()
-    
+      local cost = calculatePrice(idString, math.floor(amount))
+
+      purchaseFrame:show()
+      purchaseFrameText:setText("Please Input "..cost.." "..paymentType.."(s) And Then Click Finish To Receive Your Product!")
+
+      amountFrame:addButton()
+          :setPosition("parent.w-10","parent.h-1")
+          :setSize(10,1)
+          :setText("Finish")
+          :setBackground(colors.green)
+          :setForeground(colors.white)
+          :onClick(function()
+            turtle.select(1)
+
+            if turtle.getItemDetail(1, false).name == paymentType then
+              if turtle.getItemCount(1) >= cost then
+                local getBack = (turtle.getItemCount(1) - cost)
+
+                if getBack >= 1 then
+                  turtle.select(1)
+                  turtle.drop(getBack)
+                end
+
+                turtle.select(1)
+                turtle.dropDown()
+
+                turtle.select(itemSlot)
+                turtle.dropDown(amount)
+              else
+                purchaseFrameText:setText("Error: More Money Is Required!")
+
+                sleep(2)
+
+                loopPayment()
+              end
+            else
+              purchaseFrameText:setText("Error: Wrong Money Type!")
+
+              turtle.select(1)
+              turtle.drop()
+
+              sleep(2)
+
+              loopPayment()
+            end
+          end)
+        amountFrame:addButton()
+          :setPosition("parent.w-48","parent.h-1")
+          :setSize(10,1)
+          :setText("Cancel")
+          :setBackground(colors.yellow)
+          :setForeground(colors.white)
+          :onClick(function()
+            turtle.select(1)
+            turtle.drop()
+
+            basalt.stopUpdate()
+
+            Loop()
+          end)
     end
 
     loopPayment()
@@ -95,6 +160,7 @@ function Loop()
 
         if turtle.getItemDetail(scanData[idString].slot, false).name == idString and turtle.getItemDetail(scanData[idString].slot, false).count > 1 then
           textFrameText:setText("Selected Product: "..idString..", Please Wait...")
+          textFrame:show()
           
           sleep(2)
 
@@ -120,7 +186,7 @@ function Loop()
               amountList:addItem(" Amount: "..math.floor(maxItemAmount / 2).." | Price: "..calculatePrice(idString, math.floor(maxItemAmount / 2)))
           end
 
-          amountList:addItem(""..maxItemAmount.."")
+          amountList:addItem(" Amount: "..math.floor(maxItemAmount).." | Price: "..calculatePrice(idString, math.floor(maxItemAmount)))
           amountList:show()
 
           amountFrame:addButton()
@@ -130,7 +196,12 @@ function Loop()
             :setBackground(colors.green)
             :setForeground(colors.white)
             :onClick(function()
-              handlePayment(shopData, scanData, amountList:getItem(amountList:getItemIndex()).text)
+              local amountListText = amountList:getItem(amountList:getItemIndex()).text
+              amountListText = splitstring(amountListText, "|")
+              amountListText = string.gsub(amountListText[1], " ", "")
+              amountListText = string.gsub(amountListText[1], "Amount:", "")
+
+              handlePayment(scanData[idString].slot, idString, tonumber(amountListText))
             end)
           amountFrame:addButton()
             :setPosition("parent.w-48","parent.h-1")
