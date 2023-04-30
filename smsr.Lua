@@ -70,7 +70,7 @@ function Loop()
     end
 
     shopFrame:addButton()
-      :setPosition("parent.w-11","parent.h-1")
+      :setPosition("parent.w-10","parent.h-1")
       :setSize(10,1)
       :setText("Buy")
       :setBackground(colors.green)
@@ -104,7 +104,7 @@ function Loop()
     :setText("To Get Started, Click On \"Start\".")
   -- Next page
   welcomeFrame:addButton()
-    :setPosition("parent.w-11","parent.h-1")
+    :setPosition("parent.w-10","parent.h-1")
     :setSize(10,1)
     :setText("Start")
     :setBackground(colors.green)
