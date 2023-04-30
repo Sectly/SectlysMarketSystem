@@ -82,6 +82,9 @@ function Loop()
   end
 
   function handlePayment(itemSlot, idString, amount)
+    textFrameText:setText("Loading...")
+    textFrame:show()
+
     local cost = calculatePrice(idString, math.floor(amount))
 
     purchaseFrame:show()
