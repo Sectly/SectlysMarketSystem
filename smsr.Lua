@@ -114,8 +114,6 @@ function Loop()
           local eventData = table.pack(os.pullEventRaw())
           basalt.update(table.unpack(eventData))
 
-          sleep(4)
-
           turtle.select(1)
 
           local itemDetails = turtle.getItemDetail(1, false) or nil
