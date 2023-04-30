@@ -69,6 +69,10 @@ function Loop()
     return items
   end
 
+  function calculatePrice(id, amount)
+    return math.floor(tonumber(priceTable[id]) * tonumber(amount)) or 64
+  end
+
   function handlePayment(shopData, scanData, itemAmount)
     function loopPayment()
     
@@ -100,16 +104,20 @@ function Loop()
 
           local maxItemAmount = turtle.getItemCount(scanData[idString].slot)
 
-          amountList:addItem("1")
+          amountList:addItem(" Amount: 1 | Price: "..calculatePrice(idString, 1))
 
           if maxItemAmount == 16 and turtle.getItemSpace(scanData[idString].slot) <= 0 then
               maxItemAmount = 16
 
-              amountList:addItem(""..math.floor(maxItemAmount / 2).."")
+              amountList:addItem(" Amount: "..math.floor(maxItemAmount / 8).." | Price: "..calculatePrice(idString, math.floor(maxItemAmount / 8)))
+              amountList:addItem(" Amount: "..math.floor(maxItemAmount / 4).." | Price: "..calculatePrice(idString, math.floor(maxItemAmount / 4)))
+              amountList:addItem(" Amount: "..math.floor(maxItemAmount / 2).." | Price: "..calculatePrice(idString, math.floor(maxItemAmount / 2)))
           else
-              amountList:addItem(""..math.floor(maxItemAmount / 8).."")
-              amountList:addItem(""..math.floor(maxItemAmount / 4).."")
-              amountList:addItem(""..math.floor(maxItemAmount / 2).."")
+              amountList:addItem(" Amount: "..math.floor(maxItemAmount / 32).." | Price: "..calculatePrice(idString, math.floor(maxItemAmount / 32)))
+              amountList:addItem(" Amount: "..math.floor(maxItemAmount / 16).." | Price: "..calculatePrice(idString, math.floor(maxItemAmount / 16)))
+              amountList:addItem(" Amount: "..math.floor(maxItemAmount / 8).." | Price: "..calculatePrice(idString, math.floor(maxItemAmount / 8)))
+              amountList:addItem(" Amount: "..math.floor(maxItemAmount / 4).." | Price: "..calculatePrice(idString, math.floor(maxItemAmount / 4)))
+              amountList:addItem(" Amount: "..math.floor(maxItemAmount / 2).." | Price: "..calculatePrice(idString, math.floor(maxItemAmount / 2)))
           end
 
           amountList:addItem(""..maxItemAmount.."")
