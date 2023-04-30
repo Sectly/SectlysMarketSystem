@@ -23,10 +23,12 @@ function scanInventory()
         print(textutils.serialise(item))
 
         if (item) then
+          items[item.name].display = item.displayName
+
           if items[item.name] and items[item.name] ~= nil then
-            items[item.name] = (items[item.name] + item.count)
+            items[item.name].stock = (items[item.name] + item.count)
           else
-            items[item.name] = item.count
+            items[item.name].stock = item.count
           end
         end
       end
@@ -38,11 +40,10 @@ end
 
 function refreshStock()
   print(textutils.serialise(scanInventory()))
-  sleep(1)
+  sleep(14)
 end
 
-local textFrameText = textFrame:addLabel()
-textFrameText:setText("Error: No Text Input")
+local textFrameText = textFrame:addLabel():setText("Error: No Input Text")
 
 welcomeFrame:addLabel()
     :setPosition(1,1)
