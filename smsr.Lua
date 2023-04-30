@@ -94,6 +94,8 @@ function Loop()
         :setBackground(colors.green)
         :setForeground(colors.white)
         :onClick(function()
+          purchaseFrameText:setText("Working...")
+
           turtle.select(1)
 
           local itemDetails = turtle.getItemDetail(1, false) or nil
@@ -119,7 +121,7 @@ function Loop()
 
               Loop()
             else
-              purchaseFrameText:setText("Error: More Payment Is Required! | (Please Input "..cost.." "..paymentType.."(s) And Then Click Finish To Receive Your Product!)")
+              purchaseFrameText:setText("Error: More Payment Is Required, Please Input "..(cost - turtle.getItemCount(1)).." More "..paymentType.."(s)! | (Please Input "..cost.." "..paymentType.."(s) And Then Click Finish To Receive Your Product!)")
             end
           else
             purchaseFrameText:setText("Error: Wrong Payment Type/No Payment Input! | (Please Input "..cost.." "..paymentType.."(s) And Then Click Finish To Receive Your Product!)")
