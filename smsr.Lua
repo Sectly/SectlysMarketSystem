@@ -66,7 +66,7 @@ function Loop()
     local getItem = shopData:getItem(shopData:getItemIndex()).text
     
     local idString = splitstring(getItem, "|")
-    idString:gsub(" ", "")
+    string.gsub(idString, " ", "")
 
     print(textutils.serialise(scanData[idString[1]]))
   end
