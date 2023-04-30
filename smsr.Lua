@@ -184,6 +184,8 @@ function Loop()
 
    print("Setup Done!")
 
+   turtle.select(1)
+
    print("Shop Started!")
 
    basalt.autoUpdate()
