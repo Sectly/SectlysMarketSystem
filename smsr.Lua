@@ -54,15 +54,13 @@ local refreshStock = basalt.schedule(function()
 
   local scanData = scanInventory()
 
-  local shopData = shopFrame:addList("productList"):setPosition(20,2)
+  local shopData = shopFrame:addList("productList"):setPosition(20,2):setSize(20,18)
 
   for Id, Item in pairs(scanData) do
     print(Id)
     print(Item)
     shopData:addItem(Item.displayName.." (Stock: "..Item.stock..") | Price: N/A")
   end
-
-  sleep(14)
 
   textFrame:hide()
   shopFrame:show()
