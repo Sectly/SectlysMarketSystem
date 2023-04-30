@@ -66,9 +66,11 @@ function Loop()
     local getItem = shopData:getItem(shopData:getItemIndex()).text
     
     local idString = splitstring(getItem, "|")
-    string.gsub(idString, " ", "")
+    idString = string.gsub(idString[1], " ", "")
 
-    print(textutils.serialise(scanData[idString[1]]))
+    print(idString)
+
+    print(textutils.serialise(scanData[idString]))
   end
 
   local refreshStock = basalt.schedule(function()
