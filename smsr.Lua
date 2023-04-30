@@ -105,7 +105,7 @@ function Loop()
         :setBackground(colors.green)
         :setForeground(colors.white)
         :onClick(function()
-          purchaseFrameText:setText("Working...")
+          purchaseFrameText:setText("Working... (Tap Finish A Few More Times Incase Its Stuck)")
           purchaseFrameText:show()
 
           local eventData = table.pack(os.pullEventRaw())
@@ -121,6 +121,12 @@ function Loop()
           if itemDetails and itemDetails ~= nil and itemDetails.name == paymentType then
             if turtle.getItemCount(1) >= cost then
               purchaseFrameText:setText("Thanks For Shopping And Come Again!")
+
+              local eventData = table.pack(os.pullEventRaw())
+              basalt.update(table.unpack(eventData))
+
+              local eventData = table.pack(os.pullEventRaw())
+              basalt.update(table.unpack(eventData))
 
               local getBack = (turtle.getItemCount(1) - cost)
 
