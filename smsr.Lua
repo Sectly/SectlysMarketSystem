@@ -23,12 +23,12 @@ function scanInventory()
         print(textutils.serialise(item))
 
         if (item) then
-          items[item.name].display = item.displayName
+          items[item.name]["displayName"] = item.displayName or item.name
 
-          if items[item.name] and items[item.name] ~= nil then
-            items[item.name].stock = (items[item.name] + item.count)
+          if items[item.name]["stock"] and items[item.name]["stock"] ~= nil then
+            items[item.name]["stock"] = (items[item.name]["stock"] + item.count)
           else
-            items[item.name].stock = item.count
+            items[item.name]["stock"] = item.count
           end
         end
       end
@@ -43,9 +43,9 @@ function refreshStock()
   
   print(textutils.serialise(scanData))
 
-  for Id, Item in pairs(scanData) do
-    print(Id + ", " + Item.display + ", " + Item.count)
-  end
+  --for Id, Item in pairs(scanData) do
+    --print(Id + ", " + Item.display + ", " + Item.count)
+  --end
 
   sleep(14)
 end
