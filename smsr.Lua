@@ -11,6 +11,8 @@ local textFrame = basalt.createFrame():setMonitor("right")
 
 welcomeFrame:show()
 
+local textFrameText = textFrame:addLabel():setText("Error: No Input Text")
+
 function scanInventory()
   local items = {}
 
@@ -63,8 +65,6 @@ local refreshStock = basalt.schedule(function()
   textFrame:hide()
   shopFrame:show()
 end)
-
-local textFrameText = textFrame:addLabel():setText("Error: No Input Text")
 
 welcomeFrame:addLabel()
     :setPosition(1,1)
