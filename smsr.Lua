@@ -9,73 +9,96 @@ local amountFrame = basalt.createFrame():setMonitor("right")
 local purchaseFrame = basalt.createFrame():setMonitor("right")
 local textFrame = basalt.createFrame():setMonitor("right")
 
-welcomeFrame:show()
+function Loop()
+  welcomeFrame:show()
 
-local textFrameText = textFrame:addLabel():setText("Error: No Input Text")
+  local textFrameText = textFrame:addLabel():setText("Error: No Input Text")
 
-function scanInventory()
-  local items = {}
+  local function scanInventory()
+    local items = {}
 
-  for i = 1, 16 do
-    if i ~= 1 then
-      turtle.select(i)
+    for i = 1, 16 do
+      if i ~= 1 then
+        turtle.select(i)
 
-      if (turtle.getItemCount(i) > 1) then
-        local item = turtle.getItemDetail(i, true)
+        if (turtle.getItemCount(i) > 1) then
+          local item = turtle.getItemDetail(i, true)
 
-        if (item) then
-          local displayName = item.displayName or item.name
+          if (item) then
+            local displayName = item.displayName or item.name
 
-          if items[item.name] and items[item.name] ~= nil then
-            items[item.name].displayName = displayName
+            if items[item.name] and items[item.name] ~= nil then
+              items[item.name].displayName = displayName
 
-            if items[item.name].stock and items[item.name].stock ~= nil then
-              items[item.name].stock = (items[item.name].stock + item.count)
+              if items[item.name].stock and items[item.name].stock ~= nil then
+                items[item.name].stock = (items[item.name].stock + item.count)
+              else
+                items[item.name].stock = item.count
+              end
             else
-              items[item.name].stock = item.count
+                items[item.name] = { ["displayName"] = displayName, ["stock"] =  item.count}
             end
-          else
-              items[item.name] = { ["displayName"] = displayName, ["stock"] =  item.count}
           end
         end
       end
     end
+
+    turtle.select(1)
+
+    return items
   end
 
-  turtle.select(1)
-
-  return items
-end
-
-local refreshStock = basalt.schedule(function()
-  textFrameText:setText("Loading...")
-  welcomeFrame:hide()
-  textFrame:show()
-
-  local scanData = scanInventory()
-
-  local shopData = shopFrame:addList("productList"):setPosition(2,2):setSize(48,17)
-
-  for Id, Item in pairs(scanData) do
-    print(Id)
-    print(Item)
-    shopData:addItem(" "..Item.displayName.." (Stock: "..Item.stock..") | Price: N/A ")
+  function buyItem()
   end
 
-  textFrame:hide()
-  shopFrame:show()
-end)
+  local refreshStock = basalt.schedule(function()
+    textFrameText:setText("Loading...")
+    welcomeFrame:hide()
+    textFrame:show()
 
-welcomeFrame:addLabel()
+    local scanData = scanInventory()
+
+    local shopData = shopFrame:addList("productList"):setPosition(2,2):setSize(48,16)
+
+    for Id, Item in pairs(scanData) do
+      print(Id)
+      print(Item)
+      shopData:addItem(" "..Item.displayName.." (Stock: "..Item.stock..") | Price: N/A ")
+    end
+
+    shopFrame:addButton()
+      :setPosition("parent.w-9","parent.h-1")
+      :setSize(10,1)
+      :setText("Buy")
+      :setBackground(colors.green)
+      :setForeground(colors.white)
+      :onClick(function()
+        buyItem()
+      end)
+    shopFrame:addButton()
+      :setPosition("parent.w-1","parent.h-1")
+      :setSize(10,1)
+      :setText("Cancel")
+      :setBackground(colors.yellow)
+      :setForeground(colors.white)
+      :onClick(function()
+        Loop()
+      end)
+
+    textFrame:hide()
+    shopFrame:show()
+  end)
+
+  welcomeFrame:addLabel()
     :setPosition(1,1)
     :setSize("parent.w-2","4")
     :setText("Welcome To TEC_NO's Shop, This Automated Shop Will Help You Buy Items With Ease!")
-welcomeFrame:addLabel()
+  welcomeFrame:addLabel()
     :setPosition(1,5)
     :setSize("parent.w-10","3")
     :setText("To Get Started, Click On \"Start\".")
   -- Next page
-welcomeFrame:addButton()
+  welcomeFrame:addButton()
     :setPosition("parent.w-9","parent.h-1")
     :setSize(10,1)
     :setText("Start")
@@ -84,5 +107,8 @@ welcomeFrame:addButton()
     :onClick(function()
       refreshStock()
     end)
+end
+
+Loop()
 
 basalt.autoUpdate()
