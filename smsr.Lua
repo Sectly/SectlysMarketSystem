@@ -206,9 +206,19 @@ function Loop()
 
           amountList:addItem(" Amount: 1 | Price: "..calculatePrice(idString, 1))
 
-          if maxItemAmount == 16 and turtle.getItemSpace(scanData[idString].slot) <= 0 then
-              maxItemAmount = 16
-
+          if maxItemAmount <= 2 then
+              amountList:selectItem(1)
+          elseif maxItemAmount <= 4 then
+              amountList:addItem(" Amount: "..math.floor(maxItemAmount / 2).." | Price: "..calculatePrice(idString, math.floor(maxItemAmount / 2)))
+          elseif maxItemAmount <= 8 then
+              amountList:addItem(" Amount: "..math.floor(maxItemAmount / 4).." | Price: "..calculatePrice(idString, math.floor(maxItemAmount / 4)))
+              amountList:addItem(" Amount: "..math.floor(maxItemAmount / 2).." | Price: "..calculatePrice(idString, math.floor(maxItemAmount / 2)))
+          elseif maxItemAmount <= 16 then
+              amountList:addItem(" Amount: "..math.floor(maxItemAmount / 8).." | Price: "..calculatePrice(idString, math.floor(maxItemAmount / 8)))
+              amountList:addItem(" Amount: "..math.floor(maxItemAmount / 4).." | Price: "..calculatePrice(idString, math.floor(maxItemAmount / 4)))
+              amountList:addItem(" Amount: "..math.floor(maxItemAmount / 2).." | Price: "..calculatePrice(idString, math.floor(maxItemAmount / 2)))
+          elseif maxItemAmount <= 32 then
+              amountList:addItem(" Amount: "..math.floor(maxItemAmount / 16).." | Price: "..calculatePrice(idString, math.floor(maxItemAmount / 16)))
               amountList:addItem(" Amount: "..math.floor(maxItemAmount / 8).." | Price: "..calculatePrice(idString, math.floor(maxItemAmount / 8)))
               amountList:addItem(" Amount: "..math.floor(maxItemAmount / 4).." | Price: "..calculatePrice(idString, math.floor(maxItemAmount / 4)))
               amountList:addItem(" Amount: "..math.floor(maxItemAmount / 2).." | Price: "..calculatePrice(idString, math.floor(maxItemAmount / 2)))
