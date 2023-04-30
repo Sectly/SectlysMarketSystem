@@ -94,11 +94,11 @@ function Loop()
 
           local amountList = amountFrame:addList("amountList"):setPosition(2,2):setSize(48,16):setScrollable(true)
 
-          local maxItemAmount = getItemCount(scanData[idString].slot)
+          local maxItemAmount = turtle.getItemCount(scanData[idString].slot)
 
           amountList:addItem("1")
 
-          if maxItemAmount == 16 and getItemSpace(scanData[idString].slot) <= 0 then
+          if maxItemAmount == 16 and turtle.getItemSpace(scanData[idString].slot) <= 0 then
               maxItemAmount = 16
 
               amountList:addItem(""..math.floor(maxItemAmount / 2).."")
