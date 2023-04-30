@@ -49,7 +49,7 @@ function Loop()
   end
 
   function buyItem(shopData, scanData)
-    local getItem = shopData:getItemIndex()
+    local getItem = shopData:getItem(shopData:getItemIndex()).text
 
     print(textutils.serialise(scanData[getItem]))
   end
