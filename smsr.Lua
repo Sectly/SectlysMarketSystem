@@ -15,6 +15,7 @@ function splitstring(input, seperator)
   return matches
 end
 
+local shopName = nil
 local paymentType = nil
 local priceTable = {}
 
@@ -315,7 +316,7 @@ function Loop()
   welcomeFrame:addLabel()
     :setPosition(1,1)
     :setSize("parent.w-2","4")
-    :setText("Welcome To TEC_NO's Shop, This Automated Shop Will Help You Buy Items With Ease!")
+    :setText("Welcome To "..shopName..", This Automated Shop Will Help You Buy Items With Ease!")
   welcomeFrame:addLabel()
     :setPosition(1,5)
     :setSize("parent.w-10","3")
@@ -344,6 +345,13 @@ function Loop()
 
      paymentType = contents.payment
      priceTable = contents.prices
+     shopName = contents.name
+   end
+
+   if shopName == nil then
+     print("Shop Name: [Example: TEC_NO's Shop]")
+       
+     shopName = read()
    end
 
    if paymentType == nil then
@@ -365,7 +373,7 @@ function Loop()
    end
 
    local file = fs.open("SMSFiles/data.txt", "w")
-   file.write(textutils.serialise({ ["payment"] = paymentType, ["prices"] = priceTable }))
+   file.write(textutils.serialise({ ["payment"] = paymentType, ["prices"] = priceTable, ["name"] = shopName }))
    file.close()
 
    print("Setup Done!")
