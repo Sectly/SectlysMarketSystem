@@ -160,6 +160,8 @@ function Loop()
       refreshStock()
    end)
 
+   print("Starting Setup")
+
    local getInventory = scanInventory()
 
    print("Payment Type: [Example: minecraft:diamond]")
@@ -177,6 +179,10 @@ function Loop()
        priceTable[Id] = read()
      end
    end
+
+   print("Setup Done!")
+
+   print("Shop Started!")
 
    basalt.autoUpdate()
 end
