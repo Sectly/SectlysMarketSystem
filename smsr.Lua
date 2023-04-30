@@ -21,6 +21,8 @@ local priceTable = {}
 function Loop()
   print("Working...")
 
+  basalt.stopUpdate()
+
   sleep(4)
 
   local basalt = require("SMSFiles/basalt")
@@ -103,6 +105,8 @@ function Loop()
           purchaseFrameText:show()
 
           basalt.schedule(function()
+            sleep(4)
+
             turtle.select(1)
 
             local itemDetails = turtle.getItemDetail(1, false) or nil
@@ -123,8 +127,6 @@ function Loop()
 
                 turtle.select(itemSlot)
                 turtle.drop(amount)
-
-                basalt.stopUpdate()
 
                 Loop()
               else
@@ -150,8 +152,6 @@ function Loop()
           basalt.schedule(function()
             turtle.select(1)
             turtle.drop()
-
-            basalt.stopUpdate()
 
             Loop()
           end)()
@@ -220,21 +220,15 @@ function Loop()
             :setBackground(colors.yellow)
             :setForeground(colors.white)
             :onClick(function()
-              basalt.stopUpdate()
-
               Loop()
             end)
         else
           textFrameText:setText("ERROR: Product Does Not Exist, Rebooting Shop... [ERR:PM2]")
 
-          basalt.stopUpdate()
-
           Loop()
         end
     else
       textFrameText:setText("ERROR: Product Does Not Exist, Rebooting Shop... [ERR:PM1]")
-
-      basalt.stopUpdate()
 
       Loop()
     end
@@ -273,8 +267,6 @@ function Loop()
       :setBackground(colors.yellow)
       :setForeground(colors.white)
       :onClick(function()
-        basalt.stopUpdate()
-
         Loop()
       end)
 
