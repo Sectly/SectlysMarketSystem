@@ -80,7 +80,7 @@ function Loop()
   end
 
   function handlePayment(itemSlot, idString, amount)
-    function loopPayment()
+    local loopPayment = basalt.schedule(function()
       local cost = calculatePrice(idString, math.floor(amount))
 
       purchaseFrame:show()
@@ -120,7 +120,7 @@ function Loop()
               else
                 purchaseFrameText:setText("Error: More Payment Is Required!")
 
-                sleep(2)
+                sleep(4)
 
                 loopPayment()
               end
@@ -130,7 +130,7 @@ function Loop()
               turtle.select(1)
               turtle.drop()
 
-              sleep(2)
+              sleep(4)
 
               loopPayment()
             end
@@ -149,7 +149,7 @@ function Loop()
 
             Loop()
           end)
-    end
+    end)
 
     loopPayment()
   end
