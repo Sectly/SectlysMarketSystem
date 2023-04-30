@@ -51,7 +51,7 @@ function refreshStock()
   for Id, Item in pairs(scanData) do
     print(Id)
     print(Item)
-    --shopData:addItem(Item.display.." (Stock: "..Item.count..") | Price: N/A")
+    shopData:addItem(Item.display.." (Stock: "..Item.stock..") | Price: N/A")
   end
 
   sleep(14)
@@ -75,9 +75,11 @@ welcomeFrame:addButton()
     :setBackground(colors.green)
     :setForeground(colors.white)
     :onClick(function()
+      welcomeFrame:hide()
       textFrameText:setText("Loading...")
       textFrame:show()
       refreshStock()
+      textFrame:hide()
       shopFrame:show()
     end)
 
