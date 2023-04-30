@@ -9,6 +9,8 @@ local amountFrame = basalt.createFrame():setMonitor("right")
 local purchaseFrame = basalt.createFrame():setMonitor("right")
 local textFrame = basalt.createFrame():setMonitor("right")
 
+welcomeFrame:show()
+
 function scanInventory()
   local items = {}
 
