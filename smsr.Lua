@@ -54,7 +54,7 @@ local refreshStock = basalt.schedule(function()
 
   local scanData = scanInventory()
 
-  local shopData = shopFrame:addList("productList"):setPosition(20,2):setSize(20,18)
+  local shopData = shopFrame:addList("productList"):setPosition(18,0):setSize(18,18)
 
   for Id, Item in pairs(scanData) do
     print(Id)
