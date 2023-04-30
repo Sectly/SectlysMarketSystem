@@ -140,9 +140,21 @@ function Loop()
               Loop()
             else
               purchaseFrameText:setText("Error: More Payment Is Required, Please Input "..(cost - turtle.getItemCount(1)).." More "..paymentType.."(s)! | (Please Input "..cost.." "..paymentType.."(s) And Then Click Finish To Receive Your Product!)")
+
+              local eventData = table.pack(os.pullEventRaw())
+              basalt.update(table.unpack(eventData))
+
+              local eventData = table.pack(os.pullEventRaw())
+              basalt.update(table.unpack(eventData))
             end
           else
             purchaseFrameText:setText("Error: Wrong Payment Type/No Payment Input! | (Please Input "..cost.." "..paymentType.."(s) And Then Click Finish To Receive Your Product!)")
+
+            local eventData = table.pack(os.pullEventRaw())
+            basalt.update(table.unpack(eventData))
+
+            local eventData = table.pack(os.pullEventRaw())
+            basalt.update(table.unpack(eventData))
 
             turtle.select(1)
             turtle.drop()
@@ -157,12 +169,16 @@ function Loop()
         :onClick(function()
           purchaseFrameText:setText("Working...")
 
-          basalt.schedule(function()
-            turtle.select(1)
-            turtle.drop()
+          local eventData = table.pack(os.pullEventRaw())
+          basalt.update(table.unpack(eventData))
 
-            Loop()
-          end)()
+          local eventData = table.pack(os.pullEventRaw())
+          basalt.update(table.unpack(eventData))
+
+          turtle.select(1)
+          turtle.drop()
+
+          Loop()
         end)
   end
 
