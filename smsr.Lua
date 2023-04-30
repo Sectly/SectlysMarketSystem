@@ -80,78 +80,66 @@ function Loop()
   end
 
   function handlePayment(itemSlot, idString, amount)
-    local loopPayment = basalt.schedule(function()
-      local cost = calculatePrice(idString, math.floor(amount))
+    local cost = calculatePrice(idString, math.floor(amount))
 
-      purchaseFrame:show()
-      purchaseFrameText:setText("Please Input "..cost.." "..paymentType.."(s) And Then Click Finish To Receive Your Product!")
+    purchaseFrame:show()
+    purchaseFrameText:setText("Please Input "..cost.." "..paymentType.."(s) And Then Click Finish To Receive Your Product!")
 
-      purchaseFrame:addButton()
-          :setPosition("parent.w-10","parent.h-1")
-          :setSize(10,1)
-          :setText("Finish")
-          :setBackground(colors.green)
-          :setForeground(colors.white)
-          :onClick(function()
-            turtle.select(1)
+    purchaseFrame:addButton()
+        :setPosition("parent.w-10","parent.h-1")
+        :setSize(10,1)
+        :setText("Finish")
+        :setBackground(colors.green)
+        :setForeground(colors.white)
+        :onClick(function()
+          turtle.select(1)
 
-            if turtle.getItemDetail(1, false) and turtle.getItemDetail(1, false) ~= nil and turtle.getItemDetail(1, false).name == paymentType then
-              if turtle.getItemCount(1) >= cost then
-                local getBack = (turtle.getItemCount(1) - cost)
+          if turtle.getItemDetail(1, false) and turtle.getItemDetail(1, false) ~= nil and turtle.getItemDetail(1, false).name == paymentType then
+            if turtle.getItemCount(1) >= cost then
+              local getBack = (turtle.getItemCount(1) - cost)
 
-                if getBack >= 1 then
-                  turtle.select(1)
-                  turtle.drop(getBack)
-                end
-
+              if getBack >= 1 then
                 turtle.select(1)
-                turtle.dropDown()
-
-                turtle.select(itemSlot)
-                turtle.dropDown(amount)
-
-                purchaseFrameText:setText("Thanks For Shopping And Come Again!")
-
-                sleep(4)
-
-                basalt.stopUpdate()
-
-                Loop()
-              else
-                purchaseFrameText:setText("Error: More Payment Is Required!")
-
-                sleep(4)
-
-                loopPayment()
+                turtle.drop(getBack)
               end
-            else
-              purchaseFrameText:setText("Error: Wrong Payment Type/No Payment Input!")
 
               turtle.select(1)
-              turtle.drop()
+              turtle.dropDown()
+
+              turtle.select(itemSlot)
+              turtle.dropDown(amount)
+
+              purchaseFrameText:setText("Thanks For Shopping And Come Again!")
 
               sleep(4)
 
-              loopPayment()
+              basalt.stopUpdate()
+
+              Loop()
+            else
+              purchaseFrameText:setText("Error: More Payment Is Required! | (Please Input "..cost.." "..paymentType.."(s) And Then Click Finish To Receive Your Product!)")
             end
-          end)
-        purchaseFrame:addButton()
-          :setPosition("parent.w-48","parent.h-1")
-          :setSize(10,1)
-          :setText("Cancel")
-          :setBackground(colors.yellow)
-          :setForeground(colors.white)
-          :onClick(function()
+          else
+            purchaseFrameText:setText("Error: Wrong Payment Type/No Payment Input! | (Please Input "..cost.." "..paymentType.."(s) And Then Click Finish To Receive Your Product!)")
+
             turtle.select(1)
             turtle.drop()
+          end
+        end)
+      purchaseFrame:addButton()
+        :setPosition("parent.w-48","parent.h-1")
+        :setSize(10,1)
+        :setText("Cancel")
+        :setBackground(colors.yellow)
+        :setForeground(colors.white)
+        :onClick(function()
+          turtle.select(1)
+          turtle.drop()
 
-            basalt.stopUpdate()
+          basalt.stopUpdate()
 
-            Loop()
-          end)
-    end)
-
-    loopPayment()
+          Loop()
+        end)
   end
 
   function buyItem(shopData, scanData)
