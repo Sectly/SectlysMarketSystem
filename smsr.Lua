@@ -1,3 +1,7 @@
+-- // Made By: Sectly_playz#1404 | Licence: MIT
+-- // Source: https://github.com/Sectly/SectlysMarketSystem
+-- // Installer: pastebin run SNPivk8e
+
 local tSha = {}
 local Sectly = "Sectly"
 
@@ -387,3 +391,5 @@ function Loop()
 end
 
 Loop()
+
+-- // Made By: Sectly_playz#1404 | Licence: MIT
