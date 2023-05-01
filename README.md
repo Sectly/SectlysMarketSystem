@@ -1,4 +1,4 @@
 # SectlysMarketSystem
-Sectly's Market System (MC ComputerCraft)
+Sectly's Market System (Minecraft CC:Tweaked Mod)
 
-Its a shop for my stuff made with computercraft and lots of coding
+Its a free to use shop system made for ComputerCraft
