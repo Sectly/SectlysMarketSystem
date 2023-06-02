@@ -4,9 +4,9 @@ Sectly's Market System (Minecraft CC:Tweaked Mod)
 Its a free to use shop system made for (ComputerCraft)[https://www.computercraft.info/]
 
 ComputerCraft Downloads:
-Forge: [CC:Tweaked](https://modrinth.com/mod/cc-tweaked)
-Fabric/Quilt: [CC:Restitched](https://modrinth.com/mod/cc-restitched)
-Fabric/Quilt/Polymer: [CC:Restitched with Polymer](https://modrinth.com/mod/cc-polymer)
+- Forge: [CC:Tweaked](https://modrinth.com/mod/cc-tweaked)
+- Fabric/Quilt: [CC:Restitched](https://modrinth.com/mod/cc-restitched)
+- Fabric/Quilt/Polymer: [CC:Restitched with Polymer](https://modrinth.com/mod/cc-polymer)
 
 DM: Sectly_playz#1404 On [Discord](https://discord.com/) Incase You Need Help, Want To Set It Up Or Contribute To The Project
 
