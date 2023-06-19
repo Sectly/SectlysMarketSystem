@@ -1,7 +1,7 @@
 # SectlysMarketSystem
 Sectly's Market System (Minecraft CC:Tweaked Mod)
 
-Its a free to use shop system made for (ComputerCraft)[https://www.computercraft.info/]
+Its a free to use shop system made for [ComputerCraft](https://www.computercraft.info/)
 
 ComputerCraft Downloads:
 - Forge: [CC:Tweaked](https://modrinth.com/mod/cc-tweaked)
